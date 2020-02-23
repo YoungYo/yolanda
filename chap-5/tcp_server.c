@@ -9,7 +9,6 @@ void read_data(int sockfd) {
         fprintf(stdout, "block in read\n");
         if ((n = readn(sockfd, buf, 1024)) == 0)
             return;
-
         time++;
         fprintf(stdout, "1K read for %d \n", time);
         usleep(1000);

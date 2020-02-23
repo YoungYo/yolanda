@@ -1,29 +1,28 @@
 //#include <netinet/in.h>
 #include "lib/common.h"
 
-
 # define    NDG         2000    /* datagrams to send */
 # define    DGLEN       1400    /* length of each datagram */
 # define    MAXLINE     4096
 
-
 int main(int argc, char **argv) {
     if (argc != 2) {
         error(1, 0, "usage: udpclient <IPaddress>");
-
     }
+    /*******创建一个类型为SOCK_DGRAM的本地套接字******/
     int socket_fd;
     socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
 
+    /*******初始化目标服务器的地址和端口******/
     struct sockaddr_in server_addr;
     bzero(&server_addr, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(SERV_PORT);
-    inet_pton(AF_INET, argv[1], &server_addr.sin_addr);
+    server_addr.sin_port = htons(SERV_PORT); //htons 函数的作用是将主机字节顺序转换成网络字节顺序
+    inet_pton(AF_INET, argv[1], &server_addr.sin_addr);//地址转换函数，可以在将IP地址在“点分十进制”和“二进制整数”之间转换
 
     socklen_t server_len = sizeof(server_addr);
 
-    struct sockaddr *reply_addr;
+    struct sockaddr *reply_addr; //存储对端发送方的地址和端口等信息
     reply_addr = malloc(server_len);
 
     char send_line[MAXLINE], recv_line[MAXLINE + 1];

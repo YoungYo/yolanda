@@ -47,6 +47,7 @@ int main(int argc, char **argv) {
 
         len = 0;
         recv_line[0] = 0;
+        printf("程序运行到这里了");
         n = recvfrom(socket_fd, recv_line, MAXLINE, 0, reply_addr, &len);
         if (n < 0)
             error(1, errno, "recvfrom failed");

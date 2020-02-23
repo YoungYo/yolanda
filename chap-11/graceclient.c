@@ -25,18 +25,18 @@ int main(int argc, char **argv) {
     char send_line[MAXLINE], recv_line[MAXLINE + 1];
     int n;
 
-    fd_set readmask;
+    fd_set readmask; //fd_set是一个结构体，是一个存放文件描述符的集合
     fd_set allreads;
 
-    FD_ZERO(&allreads);
-    FD_SET(0, &allreads);
-    FD_SET(socket_fd, &allreads);
+    FD_ZERO(&allreads); //将allreads里面的文件描述符清空
+    FD_SET(0, &allreads); //标准输入的文件描述符是0，此处是将标准输入的文件描述符加入allreads
+    FD_SET(socket_fd, &allreads); //将之前创建的socket的文件描述符加入allreads
     for (;;) {
         readmask = allreads;
-        int rc = select(socket_fd + 1, &readmask, NULL, NULL, NULL);
+        int rc = select(socket_fd + 1, &readmask, NULL, NULL, NULL); //select函数的作用是检查指定的文件描述符集合中的文件描述符是否发生了变化（是否可以读或写）
         if (rc <= 0)
             error(1, errno, "select failed");
-        if (FD_ISSET(socket_fd, &readmask)) {
+        if (FD_ISSET(socket_fd, &readmask)) { //FD_ISSET的作用是检查集合中指定的文件描述符是否可以读写
             n = read(socket_fd, recv_line, MAXLINE);
             if (n < 0) {
                 error(1, errno, "read error");

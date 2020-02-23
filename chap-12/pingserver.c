@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
         error(1, 0, "usage: tcpsever <sleepingtime>");
     }
 
-    int sleepingTime = atoi(argv[1]);
+    int sleepingTime = atoi(argv[1]); //把字符串转换成整型数
 
     int listenfd;
     listenfd = socket(AF_INET, SOCK_STREAM, 0);

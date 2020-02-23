@@ -4,8 +4,8 @@
 
 #include  "lib/common.h"
 
-
 int main(int argc, char **argv) {
+    printf("服务端启动啦！\n");
     if (argc != 2) {
         error(1, 0, "usage: unixdataserver <local_path>");
     }

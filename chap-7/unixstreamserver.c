@@ -4,8 +4,8 @@
 
 #include  "lib/common.h"
 
-
 int main(int argc, char **argv) {
+    printf("服务端启动");
     if (argc != 2) {
         error(1, 0, "usage: unixstreamserver <local_path>");
     }

@@ -4,3 +4,6 @@ target_link_libraries(nonblockingserver yolanda)
 
 add_executable(nonblockingclient nonblockingclient.c)
 target_link_libraries(nonblockingclient yolanda)
+
+add_executable(blockingserver blockingserver.c)
+target_link_libraries(blockingserver yolanda)

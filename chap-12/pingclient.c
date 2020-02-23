@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
     bzero(&server_addr, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(SERV_PORT);
-    inet_pton(AF_INET, argv[1], &server_addr.sin_addr);
+    inet_pton(AF_INET, argv[1], &server_addr.sin_addr); //将argv[1]中存储的点分十进制形式的IP地址转换成二进制整数，并将结果存到server_addr.sin_addr中
 
     socklen_t server_len = sizeof(server_addr);
     int connect_rt = connect(socket_fd, (struct sockaddr *) &server_addr, server_len);
