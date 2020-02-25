@@ -8,6 +8,7 @@ struct buffer {
     int readIndex;       //缓冲读取位置
     int writeIndex;      //缓冲写入位置
     int total_size;      //总大小
+    int lastWriteLength; //上次写入的大小
 };
 
 

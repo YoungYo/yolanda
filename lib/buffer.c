@@ -12,6 +12,7 @@ struct buffer *buffer_new() {
     buffer1->total_size = INIT_BUFFER_SIZE;
     buffer1->readIndex = 0;
     buffer1->writeIndex = 0;
+    buffer1->lastWriteLength = 0;
     return buffer1;
 }
 
@@ -92,9 +93,11 @@ int buffer_socket_read(struct buffer *buffer, int fd) {
         return -1;
     } else if (result <= max_writable) {
         buffer->writeIndex += result;
+        buffer->lastWriteLength = result;
     } else {
         buffer->writeIndex = buffer->total_size;
         buffer_append(buffer, additional_buffer, result - max_writable);
+        buffer->lastWriteLength = result - max_writable;
     }
     return result;
 }

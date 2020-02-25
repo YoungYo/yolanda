@@ -4,7 +4,7 @@ int another_shared = 0;
 
 void * thread_run(void *arg) {
     int *calculator = (int *) arg;
-    printf("hello, world, tid == %d \n", pthread_self());
+    printf("hello, world, tid == %lu \n", pthread_self());
     for (int i = 0; i < 1000; i++) {
         *calculator += 1;
         another_shared += 1;
@@ -12,7 +12,7 @@ void * thread_run(void *arg) {
 }
 
 int main(int c, char **v) {
-    int calculator;
+    int calculator = 0;
 
     pthread_t tid1;
     pthread_t tid2;

@@ -2,8 +2,7 @@
 
 #define MAX_LINE 4096
 
-char
-rot13_char(char c) {
+char rot13_char(char c) {
     if ((c >= 'a' && c <= 'm') || (c >= 'A' && c <= 'M'))
         return c + 13;
     else if ((c >= 'n' && c <= 'z') || (c >= 'N' && c <= 'Z'))
